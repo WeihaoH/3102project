@@ -29,14 +29,14 @@ public class Team implements Serializable {
     private List candidates;
     private Date formDeadline;
 
-    public Team(){
-    
+    public Team() {
+
     }
-    
-    public Team(String id){
+
+    public Team(String id) {
         this.teamId = id;
     }
-    
+
     public String getTeamName() {
         return teamName;
     }
@@ -64,7 +64,7 @@ public class Team implements Serializable {
     public Date getFormDeadline() {
         return formDeadline;
     }
-    
+
     public String getId() {
         return teamId;
     }
@@ -125,5 +125,5 @@ public class Team implements Serializable {
     public String toString() {
         return "TMS.ejb.persistence.Team[ id = " + teamId + " ]";
     }
-    
+
 }

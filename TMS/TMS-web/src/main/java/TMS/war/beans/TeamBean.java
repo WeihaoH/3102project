@@ -9,6 +9,9 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.ejb.EJB;
 import TMS.ejb.beans.TeamEJBLocal;
+import TMS.ejb.persistence.Team;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,6 +23,7 @@ public class TeamBean {
     @EJB
     private TeamEJBLocal teamEJB;
     private String status;
+    private List<Team> teams;
     
     /**
      * Creates a new instance of TeamBean
@@ -34,13 +38,31 @@ public class TeamBean {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
     
     public void createTeam(){
         if (teamEJB.createTeam()) {
-            setStatus("Created!!!!!");
+            setStatus("Created.");
         } else {
-            setStatus("Creation failed. Fuck you!!!");
+            setStatus("Creation failed.");
         }
     }
     
+    public String findAllTeams(){
+        List<Team> resultList = teamEJB.findAll();
+        if (resultList != null) {
+            setTeams(new ArrayList<>(resultList));
+        }
+        for (Team team : resultList) {
+            
+        }
+        return "home";
+    }        
 }
