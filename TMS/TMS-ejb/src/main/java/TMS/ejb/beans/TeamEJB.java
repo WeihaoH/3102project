@@ -7,9 +7,11 @@ package TMS.ejb.beans;
 
 import javax.ejb.Stateless;
 import TMS.ejb.persistence.Team;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.UUID;
+import javax.persistence.Query;
 
 
 /**
@@ -42,5 +44,17 @@ public class TeamEJB extends AbstractFacade<Team> implements TeamEJBLocal {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    public List<Team> findAll(){
+        try {
+            Query query = em.createQuery("SELECT t FROM Team t");
+            List resultList = query.getResultList();
+            return resultList;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return null;
     }
 }

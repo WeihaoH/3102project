@@ -60,9 +60,6 @@ public class TeamBean {
         if (resultList != null) {
             setTeams(new ArrayList<>(resultList));
         }
-        for (Team team : resultList) {
-            
-        }
         return "home";
     }        
 }
