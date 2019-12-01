@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="TMS-web" />
+        <module name="TMS-ear" />
+        <module name="TMS-ejb" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="TMS-ejb" options="-endorseddirs D:\Ocaml\OCaml64\home\RoyLiu\seg3102\project\3102project\TMS\TMS-ejb\target/endorsed" />
+      <module name="TMS-web" options="-endorseddirs D:\Ocaml\OCaml64\home\RoyLiu\seg3102\project\3102project\TMS\TMS-web\target/endorsed" />
+    </option>
+  </component>
+</project>
