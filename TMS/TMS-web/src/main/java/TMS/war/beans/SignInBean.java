@@ -37,7 +37,7 @@ public class SignInBean {
     private String lastname;
     private String email;   
     private String password;
-    private String role;
+    private String roletype;
     @PersistenceContext(unitName = "UserAccountPU")
     private EntityManager em;
     @Resource
@@ -119,19 +119,13 @@ public class SignInBean {
         this.email = email;
     }
 
-    /**
-     * @return the role
-     */
-    public String getRole() {
-        return role;
-    }
+	public String getRoletype() {
+		return roletype;
+	}
 
-    /**
-     * @param role the role to set
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public void setRoletype(String roletype) {
+		this.roletype = roletype;
+	}
 
     /**
      * @return the password
@@ -172,8 +166,8 @@ public class SignInBean {
             acc.setFirstname(firstname);
             acc.setLastname(lastname);
             acc.setEmail(email);
-            System.out.println(role);
-            acc.setRole(role);
+            System.out.println(roletype);
+            acc.setRole(roletype);
             // randomly generate salt value
             final Random r = new SecureRandom();
             byte[] salt = new byte[32];

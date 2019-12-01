@@ -114,6 +114,8 @@ public class UserAccount implements Serializable {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
+    
+    
     public String getRole() {
         return role;
     }
@@ -128,14 +130,14 @@ public class UserAccount implements Serializable {
 
 
     /**
-     * @return the Email
+     * @return the city
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * @param email the email to set
+     * @param city the city to set
      */
     public void setEmail(String email) {
         this.email = email;
