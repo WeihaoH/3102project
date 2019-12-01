@@ -57,10 +57,13 @@ public class AuthenticationFilter implements Filter {
         String reqURI = req.getRequestURI();
         // redirects to login page if an attempt to access a page in /protected folder  
         // is made by an anonymous (not logged) user
-        if (reqURI.contains("/protected/") && (ses == null || (ses != null && ses.getAttribute("User") == null))) {
-            String loginURL = req.getContextPath() + "/faces/login.xhtml";
+        if (reqURI.contains("/student/") && (ses == null || (ses != null && ses.getAttribute("student") == null))) {
+            String loginURL = req.getContextPath() + "/faces/logIn.xhtml";
             res.sendRedirect(loginURL);
-        } else {
+        }else if (reqURI.contains("/teacher/") && (ses == null || (ses != null && ses.getAttribute("teacher") == null))) {
+            String loginURL = req.getContextPath() + "/faces/logIn.xhtml";
+            res.sendRedirect(loginURL);
+        }else {
             chain.doFilter(request, response);
         }  
             

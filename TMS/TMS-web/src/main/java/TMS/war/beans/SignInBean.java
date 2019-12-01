@@ -11,6 +11,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.Date;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,14 +36,27 @@ public class SignInBean {
     private String firstname;
     private String lastname;
     private String email;   
-    private String role;
     private String password;
+    private String role;
     @PersistenceContext(unitName = "UserAccountPU")
     private EntityManager em;
     @Resource
     private javax.transaction.UserTransaction utx;
     
     private String status;
+
+    
+    
+   private static final Map<String,Object> roleVal; 
+   static{
+      roleVal = new LinkedHashMap<>();
+      roleVal.put("Student", "student");
+      roleVal.put("Teacher", "teacher");
+   }
+
+   public Map<String, Object> getRoleVal() {
+      return roleVal;
+   }
     /**
      * Creates a new instance of SignInBean
      */
@@ -97,7 +113,7 @@ public class SignInBean {
     }
 
     /**
-     * @param birthDate the birthDate to set
+     * @param Email the Email to set
      */
     public void setEmail(String email) {
         this.email = email;
@@ -156,6 +172,7 @@ public class SignInBean {
             acc.setFirstname(firstname);
             acc.setLastname(lastname);
             acc.setEmail(email);
+            System.out.println(role);
             acc.setRole(role);
             // randomly generate salt value
             final Random r = new SecureRandom();

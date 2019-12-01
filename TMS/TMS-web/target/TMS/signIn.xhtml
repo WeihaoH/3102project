@@ -13,11 +13,10 @@
                 <h1>Create New Account...</h1>
                 <f:view>
                     <h:form>
-                    <h:outputText value="Role"></h:outputText>
-                    <select>
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                    </select>
+                        <h:outputText value="Role"></h:outputText>
+                        <h:selectOneMenu id="role" value="#{signInBean.role}">
+                            <f:selectItems value="#{signInBean.roleVal}"/>
+                        </h:selectOneMenu>
                     <h:panelGrid columns="3">
                     <h:outputText value="User Id"></h:outputText>
                     <h:inputText id="id" value="#{signInBean.userId}" required="true" requiredMessage="Please enter User Id">
