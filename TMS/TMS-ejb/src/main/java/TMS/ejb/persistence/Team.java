@@ -28,6 +28,7 @@ public class Team implements Serializable {
     private String courseCode;
     private List candidates;
     private Date formDeadline;
+    private boolean isFull;
 
     public Team() {
 
@@ -101,6 +102,14 @@ public class Team implements Serializable {
         this.formDeadline = formDeadline;
     }
 
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public void setFull(boolean isFull) {
+        this.isFull = isFull;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
