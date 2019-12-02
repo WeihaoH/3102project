@@ -7,11 +7,17 @@ package TMS.war.beans;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.ejb.EJB;
-import TMS.ejb.beans.TeamEJBLocal;
-import TMS.ejb.persistence.Team;
-import java.util.ArrayList;
+import persistence.Team;
 import java.util.List;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -20,8 +26,10 @@ import java.util.List;
 @Named(value = "teamBean")
 @RequestScoped
 public class TeamBean {
-    @EJB
-    private TeamEJBLocal teamEJB;
+    @PersistenceContext(unitName = "TMS-PU")
+    private EntityManager em;
+    @Resource
+    private javax.transaction.UserTransaction utx;
     private String status;
     private List<Team> teams;
     
@@ -48,18 +56,34 @@ public class TeamBean {
     }
     
     public void createTeam(){
-        if (teamEJB.createTeam()) {
+        Team team = new Team(UUID.randomUUID().toString());
+        try {
+            persist(team);
             setStatus("Created.");
-        } else {
+        } catch (Exception e){
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             setStatus("Creation failed.");
         }
     }
     
     public String findAllTeams(){
-        List<Team> resultList = teamEJB.findAll();
-        if (resultList != null) {
-            setTeams(new ArrayList<>(resultList));
+        try {
+            Query query = em.createQuery("SELECT t FROM Team t");
+            setTeams(query.getResultList());
+        } catch (Exception e) {
+            System.err.println(e);
         }
-        return "home";
+        return "student/operationInterface";
     }        
+    
+    public void persist(Object object) {
+        try {
+            utx.begin();
+            em.persist(object);
+            utx.commit();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
+            throw new RuntimeException(e);
+        }
+    }
 }

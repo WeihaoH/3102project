@@ -11,8 +11,7 @@
 
     <ui:composition>
         <h:form>
-            <h:panelGrid columns="1">
-                <h:commandButton value="Home" action="#{teamBean.findAllTeams()}"/>  
+            <h:panelGrid columns="1">  
                 <h:button outcome="/signIn" value="Sign Up"/>        
                 <c:choose>
                 <c:when test="${ sessionScope.Student != null }">

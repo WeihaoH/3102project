@@ -32,7 +32,7 @@ public class LoginBean {
     private String userId;
     private String password;
     private String status;
-    @PersistenceContext(unitName = "UserAccountPU")
+    @PersistenceContext(unitName = "TMS-PU")
     private EntityManager em;
     @Resource
     private javax.transaction.UserTransaction utx;

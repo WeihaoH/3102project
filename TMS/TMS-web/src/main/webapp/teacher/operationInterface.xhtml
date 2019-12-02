@@ -14,11 +14,20 @@
                     <h:form>
                     <h1 align="center">Teacher Operation menu</h1>
                     <h:commandButton value="Set parameter" />
-                    <h:commandButton value="feature 3" />
+                    <h:commandButton value="View all teams" actionListener="#{teamBean.findAllTeams}" />
                     <h:commandButton value="feature 4" />
 
                         <h:commandButton value="Logout" type="command"  action="#{loginBean.logout}"/> 
                     </h:form>
+                    
+                    <h:dataTable cellpadding="10pt" value="#{teamBean.teams}" var="team">
+<!--                        <h:column><h:outputText value="#{team.teamName}"/></h:column>
+                        <h:column><h:outputText value="#{team.courseCode}"/></h:column>
+                        <h:column><h:outputText value="#{team.teamMembers}"/></h:column>
+                        <h:column><h:outputText value="#{team.creationDate}"/></h:column>
+                        <h:column><h:outputText value="#{team.isFull}"/></h:column>-->
+                        <h:column><h:outputText value="#{team.id}"/></h:column>
+                    </h:dataTable>
                 </f:view>
             </ui:define>
         </ui:composition>
