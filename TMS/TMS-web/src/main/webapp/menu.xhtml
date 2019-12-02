@@ -12,22 +12,19 @@
     <ui:composition>
         <h:form>
             <h:panelGrid columns="1">
-                <h:button value="Home"/>
-                <h:button outcome="signIn" value="Sign Up"/>
-                <h:commandButton value="Home" action="#{teamBean.findAllTeams()}"/>
-                <c:if test="${request.getSession().getAttribute('student') != null}">
-                     <h:button outcome="/student/operationInterface" value="Student User Menu"/>
-                </c:if>
-                <c:if test="${request.getSession().getAttribute('teacher') != null}">
-                     <h:button outcome="/teacher/operationInterface" value="teacher User Menu"/>
-                </c:if>
+                <h:commandButton value="Home" action="#{teamBean.findAllTeams()}"/>  
+                <h:button outcome="/signIn" value="Sign Up"/>        
+                <c:choose>
+                <c:when test="${ sessionScope.Student != null }">
+                     <h:button outcome="/student/operationInterface" value="Student User Menu"/>
+                </c:when>
+                <c:when test="${ sessionScope.Teacher != null }">
+                     <h:button outcome="/teacher/operationInterface" value="teacher User Menu"/>
+                </c:when>
                 <c:otherwise>
                     <h:button outcome="/student/operationInterface" value="User Menu"/>
                 </c:otherwise>
-                
-                <h:commandButton value="feature 2" />
-                <h:commandButton value="feature 3" />
-                <h:commandButton value="feature 4" />
+                </c:choose>
             </h:panelGrid>
         </h:form>
     </ui:composition>

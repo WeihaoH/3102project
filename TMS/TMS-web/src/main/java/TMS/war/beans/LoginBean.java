@@ -6,6 +6,7 @@
 
 package TMS.war.beans;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -76,7 +77,7 @@ public class LoginBean {
         return status;
     }
 
-    public void studentLogin() {
+    public void Login() throws IOException {
          UserAccount acc = em.find(UserAccount.class, userId);
          if (acc != null) {
              try {
@@ -91,10 +92,12 @@ public class LoginBean {
                      HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                      if(acc.getRole().equals("student")){
                         session.setAttribute("Student", acc);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/student/operationInterface.xhtml");
                      }else{
                         session.setAttribute("Teacher", acc);
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/teacher/operationInterface.xhtml");
                      }                  
-                     status="Login Successful - " + "Welcome " + acc.getUserId(); 
+                     status="Login Successful - " + "Welcome " + acc.getFirstname(); 
                  } else {
                     status="Invalid Login, Please Try again"; 
                  }
@@ -106,10 +109,11 @@ public class LoginBean {
          }
     }
 
-    public String logout() {
+    public String logout() throws IOException {
         // invalidate session to remove User
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.invalidate();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/TMS-web/faces/index.xhtml");
         // navigate to index - see faces-config.xml for navigation rules
         return "logout";
     }

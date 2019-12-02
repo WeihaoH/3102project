@@ -7,13 +7,17 @@
 
     <body>
 
-        <ui:composition template="./template.xhtml">
+        <ui:composition template="./../template.xhtml">
             <ui:define name="content">
                 <f:view>
-                    <h1 align="center">Operation menu</h1>
+                    <h:form>
+                    <h1 align="center">Student Operation menu</h1>
                     <h:commandButton value="Create Team" />
                     <h:commandButton value="feature 3" />
                     <h:commandButton value="feature 4" />
+
+                        <h:commandButton value="Logout" type="command"  action="#{loginBean.logout}"/> 
+                    </h:form>
                 </f:view>
             </ui:define>
         </ui:composition>

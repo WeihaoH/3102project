@@ -20,7 +20,7 @@
                     <h:inputSecret id="passwd" value="#{loginBean.password}">
                     </h:inputSecret>          
                     </h:panelGrid>
-                   <h:commandButton value="Login" type="command"  actionListener="#{loginBean.login}">
+                   <h:commandButton value="Login" type="command"  actionListener="#{loginBean.Login()}">
                    <f:ajax execute="id  passwd" 
                            render="status"/>
                     </h:commandButton>      
